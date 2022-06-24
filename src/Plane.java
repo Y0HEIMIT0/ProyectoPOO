@@ -42,21 +42,22 @@ public class Plane implements Runnable{
 
     public synchronized void movimientoNaranja(){
         if (state == PlaneState.ON_AIR){        // Caso para aviones que buscan aterrizar
-            System.out.println("El Avi " + id + " se esta acercando a la pista " + pista1String);
+            System.out.println("El Avion " + id + " se esta acercando a la pista " + pista1String + "Metodo sincronize");
         }
+
         else {                                  // Caso para aviones que buscan despegar
-            System.out.println("El Avion " + id + " se ha posicionado en la pista " + pista1String);
+            System.out.println("El Avion " + id + " se ha posicionado en la pista " + pista1String + "Metodo sincronize");
         }
     }
 
     @Override
     public void run() {
         synchronized (pista1){
-            if (state == PlaneState.ON_GROUND) System.out.println("El Avion " + id + " se ha posicionado en la " + pista1String);
-            else System.out.println("El Avion " + id + " se acerca a la pista " + pista1String);
+            if (state == PlaneState.ON_GROUND) System.out.println("El Avion " + id + " se ha posicionado en la " + pista1String + " Por semaforos");
+            else System.out.println("El Avion " + id + " se acerca a la pista " + pista1String + " Por semaforos");
             synchronized (pista2){
-                if (state == PlaneState.ON_GROUND) System.out.println("El Avion " + id + " procede a despegar.");
-                else System.out.println("El Avion " + id + " procede a aterrizar");
+                if (state == PlaneState.ON_GROUND) System.out.println("El Avion " + id + " procede a despegar." + "Por semaforos");
+                else System.out.println("El Avion " + id + " procede a aterrizar" + "Por semaforos");
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
