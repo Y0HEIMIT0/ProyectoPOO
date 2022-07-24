@@ -1,6 +1,6 @@
 import java.util.concurrent.Semaphore;
 
-public class Plane implements Runnable{
+public class Plane implements Runnable {
 
     //--------------------- Atributos de la clase ---------------------------------------
 
@@ -8,6 +8,7 @@ public class Plane implements Runnable{
     private PlaneState state;
     private String pistaString;
     private Semaphore semPista;
+    private PlaneView view;
 
     //--------------------- Constructor -------------------------------------------------
 
@@ -36,6 +37,7 @@ public class Plane implements Runnable{
                 this.pistaString = "pista B";
             }
         }
+        view = new PlaneView(this.id,this.state,pistaString);
     }
 
     //----------------------- Funciones a utilizar ----------------------------------------
@@ -62,8 +64,7 @@ public class Plane implements Runnable{
             despegar();                                     // Si se adquiere, se ejecuta despegar()
             semPista.release();                             // Se libera el semaforo
             System.out.println("La pista se encuentra disponible"); // Se informa que la pista se libera
-        }
-        else {                          // De no lograr adquirirse el semaforo, se esperan 2 segundos y se vuelve a intentar
+        } else {                          // De no lograr adquirirse el semaforo, se esperan 2 segundos y se vuelve a intentar
             wait(2000);
             tryDespegar();
         }
@@ -73,23 +74,20 @@ public class Plane implements Runnable{
 
         //          ACCION INICIAL PARA POSICIONAR LOS AVIONES SEGUN SU ESTADO Y PISTA INICIAL
 
-        if (state == PlaneState.ON_AIR){        // Caso para aviones que buscan aterrizar
+        if (state == PlaneState.ON_AIR) {        // Caso para aviones que buscan aterrizar
             System.out.println("El Avion " + id + " ha llegado, necesita aterrizar desde el lado " + pistaString + " de la pista.");
-        }
-        else {                                  // Caso para aviones que buscan despegar
+        } else {                                  // Caso para aviones que buscan despegar
             System.out.println("El Avion " + id + " requiere despegar desde el lado  " + pistaString + " de la pista.");
         }
 
         //          Se ejecutan las funciones para despegue o aterrizaje segun el estado del avion
 
         try {
-            if (state == PlaneState.ON_AIR){
+            if (state == PlaneState.ON_AIR) {
                 tryAterrizar();
-            }
-            else
+            } else
                 tryDespegar();
-        }
-        catch (Exception ee){
+        } catch (Exception ee) {
             ee.getCause();  // En el caso de de que se genere una excepcion, se imprime la causa
         }
 
@@ -103,4 +101,21 @@ public class Plane implements Runnable{
             throw new RuntimeException(e);  // De no poder ejecutarse, se arroja una excepcion
         }
     }
+
+    public PlaneView getView() {
+        return view;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public PlaneState getState() {
+        return state;
+    }
+
+    public String getPistaString() {
+        return pistaString;
+    }
 }
+

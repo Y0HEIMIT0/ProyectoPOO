@@ -16,7 +16,7 @@ public class Aviones extends Application{
 
     public void start(Stage primaryStage) throws InterruptedException {
 
-        ControlTower CT = new ControlTower(5);
+        ControlTower CT = new ControlTower(3);
 
 
         Rectangle rectan = new Rectangle(0,0, 700,100);
@@ -34,12 +34,22 @@ public class Aviones extends Application{
 
         vBox.getChildren().addAll(CT.getView());
 
+        VBox ABox = new VBox(20);
+        ABox.setPadding(new Insets(20));
+        ABox.setAlignment(Pos.CENTER);
+
+        ABox.getChildren().addAll(CT.getAvionview());
+
+
         BorderPane pane = new BorderPane();
         pane.setPadding(new Insets(20));
         pane.setBottom(hBox);
         pane.setLeft(vBox);
+        pane.setCenter(ABox);
 
-        Scene scene = new Scene(pane, 800, 700);
+
+
+        Scene scene = new Scene(pane, 800, 400);
         primaryStage.setTitle("Proyecto POO: Aviones");
         primaryStage.setScene(scene);
         primaryStage.show();
