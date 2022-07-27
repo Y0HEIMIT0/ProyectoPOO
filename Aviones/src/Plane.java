@@ -25,6 +25,7 @@ public class Plane implements Runnable {
                 this.state = PlaneState.ON_GROUND;
                 this.semPista = pista;
                 this.pistaString = "pista B";
+                //this.pocicion = 50;
             }
             case 2 -> {                 // Avion que quiere aterrizar desde la pista A
                 this.state = PlaneState.ON_AIR;

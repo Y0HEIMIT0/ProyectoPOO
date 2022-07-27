@@ -4,22 +4,31 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.shape.Rectangle;
 
 
+import java.util.Scanner;
+
+import static java.lang.String.valueOf;
 import static javafx.application.Application.launch;
+
 
 public class Aviones extends Application{
 
     public void start(Stage primaryStage) throws InterruptedException {
 
-        ControlTower CT = new ControlTower(3);
+        System.out.println("Number of planes");
+        Scanner sc = new Scanner(System.in);
+        int numeroAviones = sc.nextInt();
+
+        ControlTower CT = new ControlTower(numeroAviones);
 
 
-        Rectangle rectan = new Rectangle(0,0, 700,100);
+        Rectangle rectan = new Rectangle(0,0, 1400,100);
         rectan.setFill(Color.LIGHTGRAY);
 
         HBox hBox = new HBox(20);
@@ -34,11 +43,14 @@ public class Aviones extends Application{
 
         vBox.getChildren().addAll(CT.getView());
 
-        VBox ABox = new VBox(20);
+        StackPane ABox = new StackPane();
         ABox.setPadding(new Insets(20));
         ABox.setAlignment(Pos.CENTER);
 
-        ABox.getChildren().addAll(CT.getAvionview());
+        int i;
+        for (i = 0; i < numeroAviones; i++) {
+            ABox.getChildren().add(CT.getAvionview(i));
+        }
 
 
         BorderPane pane = new BorderPane();
@@ -49,7 +61,7 @@ public class Aviones extends Application{
 
 
 
-        Scene scene = new Scene(pane, 800, 400);
+        Scene scene = new Scene(pane, 1500, 700);
         primaryStage.setTitle("Proyecto POO: Aviones");
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -1,15 +1,27 @@
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+
+import java.awt.*;
 
 public class ControlTowerView extends BorderPane {
 
     public ControlTowerView(ControlTower controlTower) {
         this.controlTower = controlTower;
 
-        TextField numavion = new TextField();
+        Button numavion = new Button("Iniciar");
+
+        numavion.setOnAction(e -> {
+            try {
+                controlTower.control();
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+        });
+    /*    TextField numavion = new TextField();
         numavion.setMinSize(50,30);
         numavion.setAlignment(Pos.CENTER);
 
@@ -22,7 +34,7 @@ public class ControlTowerView extends BorderPane {
                 ex.printStackTrace();
             }
         });
-
+    */
 
 
         HBox vBox0 = new HBox(20);
@@ -32,6 +44,6 @@ public class ControlTowerView extends BorderPane {
 
         getChildren().addAll(vBox0);
     }
-
+    public Rectangle cuadrado1 = new Rectangle(0,0,100,20);
     private ControlTower controlTower;
 }
