@@ -61,13 +61,8 @@ public class PlaneView extends Group{
 
         //Image img = new Image(getClass().getResourceAsStream("D:/UTFSM/2022-1/SSOO/Tarea2/Tarea_SSOO/Aviones"));
        // ImageView imgView = new ImageView(img);
-       // BorderPane pane = new BorderPane();
-
-  /*      getChildren().add(new Rectangle(10,10,100,20));
-        getChildren().add(new Rectangle(1000,10,100,20));
-        getChildren().add(new Rectangle(10,500,100,20));
-        getChildren().add(new Rectangle(1000,500,100,20));
- */    //   getChildren().add(pane);
+        BorderPane pane = new BorderPane();
+        getChildren().add(pane);
 
     }
 }

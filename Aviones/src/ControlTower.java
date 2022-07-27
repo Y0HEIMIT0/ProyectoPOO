@@ -12,6 +12,9 @@ public class ControlTower {
         this.numeroAviones = numeroAviones;
         view = new ControlTowerView(this);
         avionview = new PlaneView[numeroAviones]; //Inicializa el arreglo con el tamaño que se haya ingresado en textfield
+        for (int i = 0; i < numeroAviones; i++){
+            avionview[i] = new PlaneView(0,PlaneState.ON_AIR,"Pista A");
+        }
     }
 
 
@@ -30,7 +33,7 @@ public class ControlTower {
     public void control() throws InterruptedException {
         Semaphore pista = new Semaphore(1); // Semaforo que se utiliza para bloquear/desbloquear la pista
 
-        for (int i = 0; i < numeroAviones + 1; i++){
+        for (int i = 0; i < numeroAviones; i++){
             Random random = new Random();
             int state = random.nextInt(4);  // Se crean aviones segun 4 estados disponibles, se describen en la clase Plane
             Plane avion = new Plane(i, state, pista);

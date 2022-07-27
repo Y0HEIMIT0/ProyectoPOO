@@ -47,8 +47,8 @@ public class Aviones extends Application{
         ABox.setPadding(new Insets(20));
         ABox.setAlignment(Pos.CENTER);
 
-        int i;
-        for (i = 0; i < numeroAviones; i++) {
+
+        for (int i = 0; i < numeroAviones; i++) {
             ABox.getChildren().add(CT.getAvionview(i));
         }
 

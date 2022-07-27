@@ -14,9 +14,11 @@ public class ControlTowerView extends BorderPane {
 
         Button numavion = new Button("Iniciar");
 
-        numavion.setOnAction(e -> {
+            numavion.setOnAction(e -> {
             try {
                 controlTower.control();
+
+
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
