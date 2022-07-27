@@ -1,24 +1,7 @@
 import javafx.scene.Group;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 
-
-
-import java.util.concurrent.Semaphore;
-/*
-abstract class AnimationTimer extends Object{
-    public abstract void handle(long now);
-    public void start(PlaneState state){
-        if (state == PlaneState.ON_GROUND){
-            System.out.println("Plane on Ground");
-        }
-    }
-}
-
- */
 
 public class PlaneView extends Group{
 

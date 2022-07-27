@@ -1,3 +1,9 @@
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.util.Duration;
+
 import java.util.concurrent.Semaphore;
 
 public class Plane implements Runnable {
@@ -46,6 +52,8 @@ public class Plane implements Runnable {
     public void aterrizar() throws InterruptedException {   // Funcion para aterrizar una vez se haya adquirido el semaforo
         System.out.println("El Avion " + id + " procede a aterrizar.");
         Thread.sleep(3000);                           // Simula el tiempo de aterrizaje
+
+
     }
 
     public void tryAterrizar() throws InterruptedException {    // Funcion para intentar adquirir el semaforo
@@ -118,5 +126,12 @@ public class Plane implements Runnable {
     public String getPistaString() {
         return pistaString;
     }
+
+
+    
+
+    }
+
+
 }
 

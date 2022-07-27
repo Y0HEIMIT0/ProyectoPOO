@@ -37,8 +37,7 @@ public class ControlTower {
             Random random = new Random();
             int state = random.nextInt(4);  // Se crean aviones segun 4 estados disponibles, se describen en la clase Plane
             Plane avion = new Plane(i, state, pista);
-            avionview[i] = new PlaneView(avion.getId(),avion.getState(),avion.getPistaString());
-
+            avionview[i] = avion.getView(); // Obtiene los valores que debería tener para el avión i.
             new Thread(avion).start();      // Se ejecuta el hilo
             Thread.sleep(2000);       // Los aviones se crean cada 2 segundos
         }
