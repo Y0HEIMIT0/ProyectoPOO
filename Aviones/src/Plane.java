@@ -15,6 +15,7 @@ public class Plane implements Runnable {
     private String pistaString;
     private Semaphore semPista;
     private PlaneView view;
+    private Movement movement;
 
     //--------------------- Constructor -------------------------------------------------
 
@@ -45,6 +46,7 @@ public class Plane implements Runnable {
             }
         }
         view = new PlaneView(this.id,this.state,pistaString);
+        movement = new Movement();
     }
 
     //----------------------- Funciones a utilizar ----------------------------------------
@@ -128,7 +130,95 @@ public class Plane implements Runnable {
     }
 
 
-    
+    // Para la animación:
+    private class Movement implements EventHandler<ActionEvent> {
+        public Movement (){
+            state = MovementState.WAITING_IN_GROUND_A;
+            animation = new Timeline(new KeyFrame(Duration.millis(500), this));
+            animation.setCycleCount(Timeline.INDEFINITE);
+        }
+
+        public void land2A(){
+            state = MovementState.LANDING_A;
+            animation.play();
+        }
+        public void land2B(){
+            state = MovementState.LANDING_B;
+            animation.play();
+        }
+        public void takeoff_fromA(){
+            state = MovementState.TAKING_OFF_A;
+            animation.play();
+        }
+        public void takeoff_fromB(){
+            state = MovementState.TAKING_OFF_B;
+            animation.play();
+        }
+        public void waiting_sky_A(){
+            state = MovementState.WAITING_IN_SKY_A;
+            animation.stop();
+        }
+        public void waiting_sky_B(){
+            state = MovementState.WAITING_IN_SKY_B;
+            animation.stop();
+        }
+        public void waiting_ground_A(){
+            state = MovementState.WAITING_IN_GROUND_A;
+            animation.stop();
+        }
+        public void waiting_ground_B(){
+            state = MovementState.WAITING_IN_GROUND_B;
+            animation.stop();
+        }
+        public void handle (ActionEvent event){
+
+            switch (state) {
+                case WAITING_IN_GROUND_A: break;
+                case WAITING_IN_GROUND_B: break;
+                case WAITING_IN_SKY_A:    break;
+                case WAITING_IN_SKY_B:    break;
+
+                case LANDING_A:
+                    if(view.getAvion().getX() < 1000 && view.getAvion().getY() > 10) {
+                        view.getAvion().setX(view.getAvion().getX() + 165);
+                        view.getAvion().setY(view.getAvion().getY() - 82);
+                    }
+                    else{
+                        state = MovementState.WAITING_IN_GROUND_A;
+                    }
+                    break;
+                case LANDING_B:
+                    if(view.getAvion().getX() > 10 && view.getAvion().getY() > 10) {
+                        view.getAvion().setX(view.getAvion().getX() - 165);
+                        view.getAvion().setY(view.getAvion().getY() - 82);
+                    }
+                    else{
+                        state = MovementState.WAITING_IN_GROUND_B;
+                    }
+                    break;
+                case TAKING_OFF_A:
+                    if(view.getAvion().getX() < 1000 && view.getAvion().getY() < 500) {
+                        view.getAvion().setX(view.getAvion().getX() + 165);
+                        view.getAvion().setY(view.getAvion().getY() + 82);
+                    }
+                    else{
+                        state = MovementState.WAITING_IN_SKY_B;
+                    }
+                    break;
+                case LANDING_B:
+                    if(view.getAvion().getX() > 10 && view.getAvion().getY() < 500) {
+                        view.getAvion().setX(view.getAvion().getX() - 165);
+                        view.getAvion().setY(view.getAvion().getY() + 82);
+                    }
+                    else{
+                        state = MovementState.WAITING_IN_SKY_A;
+                    }
+                    break;}
+            view.setLength(length);
+        }
+
+        private MovementState state;
+        private Timeline animation;
 
     }
 

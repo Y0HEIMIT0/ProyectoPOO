@@ -1,6 +1,10 @@
 public enum MovementState {
-    WAITING_IN_SKY,
-    WAITING_IN_GROUND,
-    TAKING_OFF,
-    LANDING
+    WAITING_IN_SKY_A,
+    WAITING_IN_GROUND_A,
+    TAKING_OFF_A,
+    LANDING_A,
+    WAITING_IN_SKY_B,
+    WAITING_IN_GROUND_B,
+    TAKING_OFF_B,
+    LANDING_B
 }

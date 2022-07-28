@@ -13,7 +13,7 @@ public class ControlTower {
         view = new ControlTowerView(this);
         avionview = new PlaneView[numeroAviones]; //Inicializa el arreglo con el tamaño que se haya ingresado en textfield
         for (int i = 0; i < numeroAviones; i++){
-            avionview[i] = new PlaneView(0,PlaneState.ON_AIR,"Pista A");
+            avionview[i] = new PlaneView(0,PlaneState.ON_AIR,"pista A");
         }
     }
 
