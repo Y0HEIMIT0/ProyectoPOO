@@ -55,7 +55,12 @@ public class Plane implements Runnable {
         System.out.println("El Avion " + id + " procede a aterrizar.");
         Thread.sleep(3000);                           // Simula el tiempo de aterrizaje
 
-
+        if (pistaString == "pista A"){
+            movement.land2A();
+        }
+        else{
+            movement.land2B();
+        }
     }
 
     public void tryAterrizar() throws InterruptedException {    // Funcion para intentar adquirir el semaforo
@@ -63,11 +68,25 @@ public class Plane implements Runnable {
         aterrizar();                                            // Se ejecuta la funcion aterrizar()
         semPista.release();                                     // Se libera el semaforo
         System.out.println("La pista se encuentra disponible"); // Luego se informa que la pista se libera
+
+        if (pistaString == "pista A"){
+            movement.waiting_ground_A();
+        }
+        else{
+            movement.waiting_ground_B();
+        }
     }
 
     public void despegar() throws InterruptedException {        // Funcion para despegar una vez se haya adquirido el semaforo
         System.out.println("El Avion " + id + " procede a despegar.");
         Thread.sleep(3000);                               // Simula el tiempo de despegue
+
+        if (pistaString == "pista A"){
+            movement.takeoff_fromA();
+        }
+        else{
+            movement.takeoff_fromB();
+        }
     }
 
     public void tryDespegar() throws InterruptedException { // Funcion para despegar una vez se haya adquirido el semaforo
@@ -78,6 +97,13 @@ public class Plane implements Runnable {
         } else {                          // De no lograr adquirirse el semaforo, se esperan 2 segundos y se vuelve a intentar
             wait(2000);
             tryDespegar();
+        }
+
+        if (pistaString == "pista A"){
+            movement.waiting_ground_A();
+        }
+        else{
+            movement.waiting_ground_B();
         }
     }
 
@@ -205,7 +231,7 @@ public class Plane implements Runnable {
                         state = MovementState.WAITING_IN_SKY_B;
                     }
                     break;
-                case LANDING_B:
+                case TAKING_OFF_B:
                     if(view.getAvion().getX() > 10 && view.getAvion().getY() < 500) {
                         view.getAvion().setX(view.getAvion().getX() - 165);
                         view.getAvion().setY(view.getAvion().getY() + 82);
@@ -214,7 +240,7 @@ public class Plane implements Runnable {
                         state = MovementState.WAITING_IN_SKY_A;
                     }
                     break;}
-            view.setLength(length);
+
         }
 
         private MovementState state;
